@@ -1,0 +1,48 @@
+<div class="container" *ngIf="user">
+	<h2 class="center">Actualizar sus datos</h2>
+
+	<div class="message success" *ngIf="status == 'success'">
+		La configuracion se actualizó correctamente
+	</div>
+
+	<div class="message failed" *ngIf="status == 'failed'">
+		La configuracion no se ha podido actualizar!!!
+	</div>
+
+	<form #userForm="ngForm" (ngSubmit)="onSubmit(userForm)">
+		<p>
+			<label for="name">Nombre</label>
+			<input type="text" name="name" #name="ngModel" [(ngModel)]="user.name" required />
+			<span class="form_error" *ngIf="name.touched && !name.valid">
+				El nombre es obligatorio
+			</span>
+		</p>
+
+		<p>
+			<label for="job">Job</label>
+			<input type="text" name="job" #job="ngModel" [(ngModel)]="user.job" required />
+			<span class="form_error" *ngIf="job.touched && !job.valid">
+				La categoría es obligatoria
+			</span>
+		</p>
+
+		<p>
+			<label for="web">Web</label>
+			<input type="text" name="web" #web="ngModel" [(ngModel)]="user.web" required />
+			<span class="form_error" *ngIf="web.touched && !web.valid">
+				La web es obligatoria
+			</span>
+		</p>
+		
+		<p>
+			<label for="description">Descripción</label>
+			<textarea name="description" #description="ngModel" [(ngModel)]="user.description" required></textarea>
+			<span class="form_error" *ngIf="description.touched && !description.valid">
+				La descripción es obligatoria
+			</span>
+		</p>
+
+		<input type="submit" value="Actualizar" [disabled]="!userForm.form.valid" />
+		
+	</form>
+</div>

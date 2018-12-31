@@ -1,0 +1,13 @@
+<div class="container" *ngIf="user">
+	<div id="title">
+		<h1>{{ user.name }}</h1>
+		<h2>{{ user.job }}</h2>
+		<p>{{ user.web }}</p>
+	</div>
+	<article class="about">
+		<h2 class="center">Sobre mi</h2>
+		<p>{{ user.description }}</p>
+		<button [routerLink]="['/editar-user', user._id]" class=" center button-primary">Editar Información</button>
+	</article>
+
+</div>

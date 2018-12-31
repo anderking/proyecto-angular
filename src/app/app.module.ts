@@ -9,19 +9,29 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';// para los fo
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AboutComponent } from './components/about/about.component';
-import { ContactComponent } from './components/contact/contact.component';
 import { CreateComponent } from './components/create/create.component';
 import { ProjectsComponent } from './components/projects/projects.component';
 import { ErrorComponent } from './components/error/error.component';
+import { DetailComponent } from './components/detail/detail.component';
+import { EditarComponent } from './components/editar/editar.component';
+import { UserComponent } from './components/user/user.component';
+import { UsersComponent } from './components/users/users.component';
+import { EdituserComponent } from './components/edituser/edituser.component';
+import { CreateuserComponent } from './components/createuser/createuser.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     AboutComponent,
-    ContactComponent,
     CreateComponent,
     ProjectsComponent,
-    ErrorComponent
+    ErrorComponent,
+    DetailComponent,
+    EditarComponent,
+    UserComponent,
+    UsersComponent,
+    EdituserComponent,
+    CreateuserComponent
   ],
   imports: [
     BrowserModule,

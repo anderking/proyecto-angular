@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Project } from '../../models/project';
-import { ProjectService } from '../../services/project.service';
-import { UploadService } from '../../services/upload.service';
-import { Global } from '../../services/global';
+import { Project } from '../../models/project'; //Importo el modelo
+import { ProjectService } from '../../services/project.service'; //Importo el servicio que tiene las funciones de crear
+import { UploadService } from '../../services/upload.service'; //Importo el servicio para poder subir imagenes
+import { Global } from '../../services/global'; // Para usar la conexion url de la api en este componente directamente
 
 @Component({
   selector: 'app-create',
@@ -18,7 +18,8 @@ export class CreateComponent implements OnInit {
 	public status: string;
 	public filesToUpload: Array<File>;
 
-	constructor(
+	constructor
+	(
 		private _projectService: ProjectService,
 		private _uploadService: UploadService)
 	{
@@ -26,43 +27,53 @@ export class CreateComponent implements OnInit {
 		this.project = new Project('','','','',2019,'','');
 	}
 
-	ngOnInit() {
+	ngOnInit()
+	{
+
 	}
 
-	onSubmit(form){
-		
-		// Guardar datos básicos
-		this._projectService.saveProject(this.project).subscribe(
-			response => {
-				if(response.project){
-					
-					// Subir la imagen
-					if(this.filesToUpload){
+	onSubmit(form)
+	{	// Guardar datos básicos
+		this._projectService.saveProject(this.project).subscribe
+		(
+			response =>
+			{
+				if(response.project)
+				{	// Subir la imagen
+					if(this.filesToUpload)
+					{
 						this._uploadService.makeFileRequest(Global.url+"upload-image/"+response.project._id, [], this.filesToUpload, 'image')
-						.then((result:any) => {
-
-							this.save_project = result.project;
-
-							this.status = 'success';
-							form.reset();
-						});
-					}else{
+						.then
+						(
+							(result:any) =>
+							{
+								this.save_project = result.project;
+								this.status = 'success';
+								form.reset();
+							}
+						);
+					}
+					else
+					{
 						this.save_project = response.project;
 						this.status = 'success';
 						form.reset();
 					}
-					
-				}else{
+				}
+				else
+				{
 					this.status = 'failed';
 				}
 			},
-			error => {
+			error =>
+			{
 				console.log(<any>error);
 			}
 		);
 	}
 
-	fileChangeEvent(fileInput: any){
+	fileChangeEvent(fileInput: any)
+	{
 		this.filesToUpload = <Array<File>>fileInput.target.files;
 	}
 

@@ -1,13 +1,13 @@
 <div class="container" *ngIf="project">
-	<h2 class="center">{{title}}</h2>
+	<h2>{{title}}</h2>
 
 	<div class="message success" *ngIf="status == 'success'">
-		El proyecto se ha creado correctamente, puedes
-		<a [routerLink]="['/proyecto', save_project._id]">verlo aquí</a>
+		El proyecto se ha actualizado correctamente, puedes
+		<a [routerLink]="['/proyecto', update_project._id]">verlo aquí</a>
 	</div>
 
 	<div class="message failed" *ngIf="status == 'failed'">
-		El proyecto NO SE HA PODIDO CREAR
+		El proyecto NO SE HA PODIDO ACTUALIZAR
 	</div>
 
 	<form #projectForm="ngForm" (ngSubmit)="onSubmit(projectForm)">
@@ -56,6 +56,7 @@
 			<input type="file" name="image" placeholder="Subir imagen" (change)="fileChangeEvent($event)"/>
 		</p>
 
-		<input type="submit" value="Enviar" [disabled]="!projectForm.form.valid" />
+		<input type="submit" value="Actualizar" [disabled]="!projectForm.form.valid" />
+		<button [routerLink]="['/proyecto', project._id]" class=" center button-primary">Regresar</button>
 	</form>
 </div>

@@ -4,3 +4,5 @@ crear las rutas en un archivo app.routing.ts
 cargar los estilos en angular.json y recompilar y empezar a maquetar
 npm install --save rxjs-compat
 crear los modelos y servicios
+Para las funcionalidades
+Una vez creado un componente, se crea un servicio por componente donde tendra los metodos de crud y demas se importa en el componente y se trabaja desde alli hacia la vista
