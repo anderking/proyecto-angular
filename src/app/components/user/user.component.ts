@@ -3,7 +3,7 @@ import { User } from '../../models/user'; //Importo el modelo
 import { UserService } from '../../services/user.service';
 import { Global } from '../../services/global';
 import { Router, ActivatedRoute, Params } from '@angular/router';
-
+import { AngularFireAuth } from '@angular/fire/auth';
 
 @Component({
   selector: 'app-user',
@@ -19,7 +19,8 @@ export class UserComponent implements OnInit {
 	(
 		private _userService: UserService,
 		private _route: ActivatedRoute,
-		private _router: Router
+		private _router: Router,
+		public afAuth: AngularFireAuth,
 	)
 	{
 		
@@ -52,5 +53,10 @@ export class UserComponent implements OnInit {
 			}
 		)
 	}
+
+  logout() {
+    this.afAuth.auth.signOut();
+    this._router.navigate(['/login']);
+  }
 
 }

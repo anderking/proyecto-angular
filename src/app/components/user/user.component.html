@@ -8,6 +8,7 @@
 		<h2 class="center">Sobre mi</h2>
 		<p>{{ user.description }}</p>
 		<button [routerLink]="['/editar-user', user._id]" class=" center button-primary">Editar Información</button>
+		<button (click)="logout()" class="button-primary">Cerrar Sesión</button>
 	</article>
 
 </div>

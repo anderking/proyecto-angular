@@ -1,0 +1,29 @@
+<div class="container">
+  <form #registerForm="ngForm" (submit)="addUser()" >
+    
+    <h2 class="form-signin-heading">Por favor registrate</h2>
+
+    <p>
+      <label for="email">Email</label>
+      <input type="email" name="email"  [(ngModel)]="email" required />
+      <!--<span class="form_error" *ngIf="email.touched && !email.valid">
+        El email es obligatorio
+      </span>-->
+    </p>
+
+    <p>
+      <label for="password">Password</label>
+      <input type="password" name="password"  [(ngModel)]="password" required />
+      <!--<span class="form_error" *ngIf="password.touched && !password.valid">
+        El password es obligatorio
+      </span>-->
+    </p>
+
+    <input type="submit" value="Register" [disabled]="!registerForm.form.valid"/>
+    <input type="reset" value="Cancelar">
+    
+    <a [routerLink]="['/login']" >¿Ya tienes una cuenta?</a>
+  
+  </form>
+
+</div>

@@ -10,7 +10,6 @@ import { Global } from '../../services/global'; // Para usar la conexion url de 
   providers:[ProjectService]
 })
 export class ProjectsComponent implements OnInit {
-	
 	public projects: Project;
 	public url:string;
 	public total:number=0;
@@ -22,11 +21,9 @@ export class ProjectsComponent implements OnInit {
 	{
 		this.url = Global.url;
 	}
-
 	ngOnInit() {
 		this.getProjectsAll();
 	}
-
 	getProjectsAll(){
 		this._projectService.getProjects().subscribe
 		(
@@ -36,7 +33,7 @@ export class ProjectsComponent implements OnInit {
 				{
 					this.projects = response.projects;
 					console.log(this.projects);
-
+					
 				}
 			},
 			error => 

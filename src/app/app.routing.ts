@@ -2,6 +2,9 @@
 import { ModuleWithProviders } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
+import { LoginComponent } from './components/login/login.component';
+import { RegisterComponent } from './components/register/register.component';
+
 // Importar componentes
 import { ErrorComponent } from './components/error/error.component';
 import { AboutComponent } from './components/about/about.component';
@@ -15,9 +18,13 @@ import { UserComponent } from './components/user/user.component';
 import { UsersComponent } from './components/users/users.component';
 import { CreateuserComponent } from './components/createuser/createuser.component';
 import { EdituserComponent } from './components/edituser/edituser.component';
+
+
 // Array de rutas
 const appRoutes: Routes = [
-	{path: '', component: AboutComponent},
+	{path: '', component: LoginComponent},
+	{path: 'login', component: LoginComponent},
+	{path: 'register', component: RegisterComponent},
 	{path: 'sobre-mi', component: AboutComponent},
 	
 	{path: 'proyectos', component: ProjectsComponent},

@@ -1,0 +1,28 @@
+<div class="container" *ngIf="user" >
+  <form #loginForm="ngForm" (submit)="login()">
+    
+    <h2 class="center">Por favor inicia sesión</h2>
+
+    <p>
+      <label for="email">Email</label>
+      <input type="email" name="email"  [(ngModel)]="email" required />
+      <!--<span class="form_error" *ngIf="email.touched && !email.valid">
+        El email es obligatorio
+      </span>-->
+    </p>
+
+    <p>
+      <label for="password">Password</label>
+      <input type="password" name="password"  [(ngModel)]="password" required />
+      <!--<span class="form_error" *ngIf="password.touched && !password.valid">
+        El password es obligatorio
+      </span>-->
+    </p>
+
+    <input type="submit" value="Login" [disabled]="!loginForm.form.valid"/>
+    <input type="reset" value="Cancelar">
+    <button (click)="loginGoogle()" class="button-delete google">Google</button>
+    <button (click)="loginFacebook()" class="button-primary facebook">Facebook</button>
+    <button [routerLink]="['/register']" class="button-primary">Registrarse</button>
+  </form>
+</div>
