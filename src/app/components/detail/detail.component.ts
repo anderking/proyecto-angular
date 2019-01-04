@@ -27,6 +27,7 @@ export class DetailComponent implements OnInit {
 	{
 		this.url = Global.url;
     	this.confirm = false;
+    	console.log(this.url);
 	}
 
 	ngOnInit()

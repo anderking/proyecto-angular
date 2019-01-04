@@ -1,12 +1,17 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { routing,appRoutingProviders } from './app.routing';//Para poder cargar las rutas
-import { HttpClientModule } from '@angular/common/http';//Para las peticioens ajax
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';//Para las peticioens ajax
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';// para los formularios
 import { environment } from '../environments/environment';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { AngularFireAuth } from '@angular/fire/auth';
+import { AuthService } from './services/auth.service';
+import { UserService } from './services/user.service';
+import { TokenInterceptorService } from './services/token-interceptor.service';
+import { EventService } from './services/event.service';
+
 
 import { AppRoutingModule } from './app-routing.module';
 import { LoginComponent } from './components/login/login.component';
@@ -23,6 +28,7 @@ import { UsersComponent } from './components/users/users.component';
 import { EdituserComponent } from './components/edituser/edituser.component';
 import { CreateuserComponent } from './components/createuser/createuser.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
+import { EventsComponent } from './components/events/events.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +45,8 @@ import { NavbarComponent } from './components/navbar/navbar.component';
     CreateuserComponent,
     LoginComponent,
     RegisterComponent,
-    NavbarComponent
+    NavbarComponent,
+    EventsComponent
   ],
   imports: [
     BrowserModule,
@@ -51,7 +58,20 @@ import { NavbarComponent } from './components/navbar/navbar.component';
     AngularFireModule.initializeApp(environment.fireBaseConfig),
     AngularFireDatabaseModule
   ],
-  providers: [appRoutingProviders,AngularFireAuth],
+  providers:
+  [
+    appRoutingProviders,
+    AngularFireAuth,
+    AuthService,
+    UserService,
+    EventService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass : TokenInterceptorService,
+      multi: true
+    },
+    
+   ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

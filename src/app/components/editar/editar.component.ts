@@ -79,7 +79,7 @@ export class EditarComponent implements OnInit {
 				{	// Subir la imagen
 					if(this.filesToUpload)
 					{
-						this._uploadService.makeFileRequest(Global.url+"upload-image/"+response.project._id, [], this.filesToUpload, 'image')
+						this._uploadService.makeFileRequest(Global.url+"upload-image-project/"+response.project._id, [], this.filesToUpload, 'image')
 						.then
 						(
 							(result:any) =>

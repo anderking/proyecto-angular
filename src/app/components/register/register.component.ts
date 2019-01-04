@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { User } from '../../models/user';
+import { UserService } from '../../services/user.service';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { auth } from 'firebase/app';
 import { Router, ActivatedRoute, Params } from '@angular/router';
@@ -8,44 +9,44 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css']
+  styleUrls: ['./register.component.css'],
+  providers: [UserService]
 })
 export class RegisterComponent implements OnInit {
 	
 	public user : User;
 	public email:string;
 	public password:string;
+	public resID:string;
 	
 	constructor
 	(
 		private _router: Router,
-		private authService: AuthService
+		private authService: AuthService,
+		private _userService: UserService
 	)
 	{
-
 	}
 
 	ngOnInit() {
 	}
 
-	addUser()
-	{
-		console.log(this.email,this.password);
-		this.authService.registerUser(this.email,this.password)
-		  .then
-		  (
-		    (res) =>
-		    {
-		      console.log('resUser: ', res);
-		      this.loginRedirect();
-		    }
-		  ).catch
-		  (
-		    err => console.log('Error: ',err.message)
-		  );
-	}
+  register() {
+     this.authService.register(this.email,this.password).subscribe(
+      res =>
+      {   
+        this.resID = res.user._id;
+        localStorage.setItem('token',res.token);
+        //this.loginRedirect();
+      },
+      err => {
+      	console.log(err);
+      }
+    );
+  }
 	
 	loginRedirect(){
-    	this._router.navigate(['/user/5c2bdb75a977691b5c41ec26']);
+    	this._router.navigate(['/user/'+this.resID+'']);
   	}
+
 }

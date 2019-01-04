@@ -7,6 +7,8 @@ import { Global } from './global';
 @Injectable()
 export class UserService{
 	public url:string;
+	private isUserLoggedIn;
+  	public usserLogged:User;
 
 	constructor
 	(
@@ -14,6 +16,18 @@ export class UserService{
 	)
 	{
 		this.url = Global.url;
+		this.isUserLoggedIn = false;
+	}
+
+	setUserLoggedIn(user:User)
+	{
+		this.isUserLoggedIn = true;
+		this.usserLogged = user;
+		localStorage.setItem('currentUser', JSON.stringify(user));
+	}
+
+	getUserLoggedIn() {
+		return JSON.parse(localStorage.getItem('currentUser'));
 	}
 
 	saveUser(user: User): Observable<any>{

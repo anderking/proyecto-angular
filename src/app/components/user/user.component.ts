@@ -36,6 +36,7 @@ export class UserComponent implements OnInit {
 				this.getUser(id);
 			}
 		);
+		//this.logout();
 	}
 
 	getUser(id)

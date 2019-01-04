@@ -10,7 +10,7 @@ import { Global } from '../../services/global'; // Para usar la conexion url de 
   providers:[ProjectService]
 })
 export class ProjectsComponent implements OnInit {
-	public projects: Project;
+	public projects: any;
 	public url:string;
 	public total:number=0;
 
@@ -33,7 +33,7 @@ export class ProjectsComponent implements OnInit {
 				{
 					this.projects = response.projects;
 					console.log(this.projects);
-					
+					this.total = this.projects.length;
 				}
 			},
 			error => 

@@ -1,16 +1,17 @@
 <div class="container" *ngIf="project">
 	<h2 class="center">{{title}}</h2>
 
-	<div class="message success" *ngIf="status == 'success'">
-		El proyecto se ha creado correctamente, puedes
-		<a [routerLink]="['/proyecto', save_project._id]">verlo aquí</a>
-	</div>
-
-	<div class="message failed" *ngIf="status == 'failed'">
-		El proyecto NO SE HA PODIDO CREAR
-	</div>
-
 	<form #projectForm="ngForm" (ngSubmit)="onSubmit(projectForm)">
+		
+		<div class="message success" *ngIf="status == 'success'">
+			El proyecto se ha creado correctamente, puedes
+			<a [routerLink]="['/proyecto', save_project._id]">verlo aquí</a>
+		</div>
+
+		<div class="message failed" *ngIf="status == 'failed'">
+			El proyecto NO SE HA PODIDO CREAR
+		</div>
+
 		<p>
 			<label for="name">Nombre</label>
 			<input type="text" name="name" #name="ngModel" [(ngModel)]="project.name" required />
@@ -56,6 +57,6 @@
 			<input type="file" name="image" placeholder="Subir imagen" (change)="fileChangeEvent($event)"/>
 		</p>
 
-		<input type="submit" value="Enviar" [disabled]="!projectForm.form.valid" />
+		<input type="submit" value="Crear" [disabled]="!projectForm.form.valid" />
 	</form>
 </div>

@@ -65,4 +65,26 @@ export class AuthService{
 	isAuth(){
 		return this.afAuth.authState.pipe(map(auth=> auth));
 	}
+
+	login(email:string, password:string): Observable<any>
+	{
+	    return this._http.post(this.url+'signin', { email: email, password: password });     
+  	}
+
+  	register(email:string, password:string): Observable<any>
+	{
+	    return this._http.post(this.url+'signup', { email: email, password: password });     
+  	}
+  logoutUser2() {
+    localStorage.removeItem('token');
+  }
+
+  getToken() {
+    return localStorage.getItem('token');
+  }
+
+  loggedIn() {
+    return !!localStorage.getItem('token');
+}
+  
 }

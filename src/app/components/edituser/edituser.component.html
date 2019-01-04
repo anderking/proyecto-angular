@@ -1,15 +1,16 @@
 <div class="container" *ngIf="user">
 	<h2 class="center">Actualizar sus datos</h2>
 
-	<div class="message success" *ngIf="status == 'success'">
-		La configuracion se actualizó correctamente
-	</div>
-
-	<div class="message failed" *ngIf="status == 'failed'">
-		La configuracion no se ha podido actualizar!!!
-	</div>
-
 	<form #userForm="ngForm" (ngSubmit)="onSubmit(userForm)">
+
+		<div class="message success" *ngIf="status == 'success'">
+			La configuracion se actualizó correctamente
+		</div>
+
+		<div class="message failed" *ngIf="status == 'failed'">
+			La configuracion no se ha podido actualizar!!!
+		</div>
+		
 		<p>
 			<label for="name">Nombre</label>
 			<input type="text" name="name" #name="ngModel" [(ngModel)]="user.name" required />
