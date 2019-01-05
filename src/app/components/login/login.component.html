@@ -5,7 +5,7 @@
 
     <p>
       <label for="email">Email</label>
-      <input type="email" name="email"  [(ngModel)]="email" required />
+      <input type="email" name="edsads"  [(ngModel)]="email" required />
       <!--<span class="form_error" *ngIf="email.touched && !email.valid">
         El email es obligatorio
       </span>-->
@@ -21,8 +21,8 @@
 
     <input type="submit" value="Login" [disabled]="!loginForm.form.valid"/>
     <input type="reset" value="Cancelar">
-    <button (click)="loginGoogle()" class="button-delete google">Google</button>
-    <button (click)="loginFacebook()" class="button-primary facebook">Facebook</button>
-    <button [routerLink]="['/register']" class="button-primary">Registrarse</button>
+    <!--<button (click)="loginGoogle()" class="button-delete google">Google</button>
+    <button (click)="loginFacebook()" class="button-primary facebook">Facebook</button>-->
   </form>
+    
 </div>

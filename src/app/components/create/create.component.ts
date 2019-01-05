@@ -17,6 +17,8 @@ export class CreateComponent implements OnInit {
 	public save_project;
 	public status: string;
 	public filesToUpload: Array<File>;
+	public resID:string = localStorage.getItem('resID');
+
 
 	constructor
 	(
@@ -24,7 +26,8 @@ export class CreateComponent implements OnInit {
 		private _uploadService: UploadService)
 	{
 		this.title = "Crear Proyecto Nuevo";
-		this.project = new Project('','','','',2019,'','');
+		this.project = new Project('','','','',2019,'','',this.resID);
+		console.log(this.project);
 	}
 
 	ngOnInit()

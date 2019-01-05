@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { UserService } from '../../services/user.service';
 
+import { HttpErrorResponse } from '@angular/common/http';
+
 import { User } from '../../models/user';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { auth } from 'firebase/app';
@@ -19,6 +21,7 @@ export class LoginComponent implements OnInit {
   public email:string;
   public password:string;
   public resID:string;
+  public url:string;
 
   constructor
   (
@@ -28,6 +31,8 @@ export class LoginComponent implements OnInit {
     private userService: UserService
    )
   {
+    
+
   }
 
   ngOnInit() {
@@ -40,10 +45,15 @@ export class LoginComponent implements OnInit {
       {   
         this.resID = res.user[0]._id;
         localStorage.setItem('token',res.token);
-        //this.loginRedirect();
+        localStorage.setItem('resID', res.user[0]._id);
+        this.loginRedirect();
       },
       err => {
-        console.log(err);
+        if(err instanceof HttpErrorResponse){
+          if(err.status===404){
+            alert(err.error.message);
+          }
+        }
       }
     );
   }
@@ -78,12 +88,10 @@ export class LoginComponent implements OnInit {
       );
   }
 
-  logout() {
-    this.authService.logoutUser();
-  }
-
   loginRedirect(){
-    this._router.navigate(['/user/'+this.resID+'']);
+    //this._router.navigate(['/user/'+this.resID+'']);
+    //this._router.navigateByUrl('/user/'+this.resID+'');
+    window.location.replace('http://localhost:4200/user/'+this.resID);
   }
 
 }

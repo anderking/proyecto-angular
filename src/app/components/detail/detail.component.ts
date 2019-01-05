@@ -16,6 +16,7 @@ export class DetailComponent implements OnInit {
 	public url: string;
 	public project: Project;
 	public confirm: boolean;
+	public resID:string;
 
 	constructor
 	(
@@ -27,6 +28,7 @@ export class DetailComponent implements OnInit {
 	{
 		this.url = Global.url;
     	this.confirm = false;
+		this.resID = localStorage.getItem('resID');
     	console.log(this.url);
 	}
 

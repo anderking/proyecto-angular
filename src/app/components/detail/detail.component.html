@@ -23,7 +23,7 @@
 			<button (click)="deleteProject(project._id)" class="button-delete">Si</button>
 		</p>
 		<p *ngIf="confirm == false">
-			<button [routerLink]="['/proyectos']" class=" center button-primary">Regresar</button>
+			<button [routerLink]="['/proyectos/',resID]" class=" center button-primary">Regresar</button>
 		</p>
 	</div>
 </div>

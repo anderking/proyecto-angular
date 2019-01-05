@@ -3,25 +3,22 @@ import { Project } from '../../models/project'; //Importo el modelo
 import { ProjectService } from '../../services/project.service'; //Importo el servicio que tiene las funciones de crear
 import { Global } from '../../services/global'; // Para usar la conexion url de la api en este componente directamente
 import { Router, ActivatedRoute, Params } from '@angular/router';
-import { UserService } from '../../services/user.service';
 
 @Component({
-  selector: 'app-projects',
-  templateUrl: './projects.component.html',
-  styleUrls: ['./projects.component.css'],
+  selector: 'app-projectsusers',
+  templateUrl: './projectsusers.component.html',
+  styleUrls: ['./projectsusers.component.css'],
   providers:[ProjectService]
 })
-export class ProjectsComponent implements OnInit {
+export class ProjectsusersComponent implements OnInit {
 	public projects: any;
 	public url:string;
 	public total:number=0;
 	public userID:string;
-	public nameUser:string;
 
 	constructor
 	(
 		private _projectService: ProjectService,
-		private _userService: UserService,
 		private _route: ActivatedRoute,
 
 	)
@@ -30,30 +27,19 @@ export class ProjectsComponent implements OnInit {
 		this.userID = localStorage.getItem('resID');
 		console.log(this.userID);
 	}
-	ngOnInit()
-	{
-		this.getUser(this.userID);
-		this.getProjectsAll();
-	}
-
-	getUser(id)
-	{
-		this._userService.getUser(id).subscribe
+	ngOnInit() {
+		this._route.params.subscribe
 		(
-			response =>
+			params =>
 			{
-				this.nameUser = response.user.name;
-			},
-			error =>
-			{
-				console.log(<any>error);
+				let id = params.id;
+				console.log(id);
+				this.getProjectsAll(id);
 			}
-		)
+		);
 	}
-
-	getProjectsAll()
-	{
-		this._projectService.getProjects().subscribe
+	getProjectsAll(id){
+		this._projectService.getProjectsUser(id).subscribe
 		(
 			response =>
 			{
@@ -71,6 +57,4 @@ export class ProjectsComponent implements OnInit {
 			}
 		);
 	}
-
-
 }

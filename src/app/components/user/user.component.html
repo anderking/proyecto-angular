@@ -1,14 +1,19 @@
 <div class="container" *ngIf="user">
 	<div id="title">
-		<h1>{{ user.name }}</h1>
-		<h2>{{ user.job }}</h2>
-		<p>{{ user.web }}</p>
+		<h1 *ngIf="user.name">{{ user.name }}</h1>
+		<h2 *ngIf="user.job">{{ user.job }}</h2>
+		<p *ngIf="user.web">{{ user.web }}</p>
+
+		<h1 *ngIf="!user.name">Actualice sus datos</h1>
+		<h2 *ngIf="!user.job">Actualice sus datos</h2>
+		<p *ngIf="!user.web">Actualice sus datos</p>
 	</div>
 	<article class="about">
 		<h2 class="center">Sobre mi</h2>
-		<p>{{ user.description }}</p>
+		<p *ngIf="user.description">{{ user.description }}</p>
+		<p *ngIf="!user.description">Actualice sus datos</p>
 		<button [routerLink]="['/editar-user', user._id]" class=" center button-primary">Editar Información</button>
-		<button (click)="logout()" class="button-primary">Cerrar Sesión</button>
+		<button (click)="logoutToken()" class="button-primary">Cerrar Sesión</button>
 	</article>
 
 </div>

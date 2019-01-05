@@ -30,6 +30,12 @@ export class ProjectService{
 		return this._http.get(this.url+'projects', {headers: headers});
 	}
 
+	getProjectsUser(id): Observable<any>{
+		let headers = new HttpHeaders().set('Content-Type', 'application/json');
+
+		return this._http.get(this.url+'projects/'+id, {headers: headers});
+	}
+
 	getProject(id): Observable<any>{
 		let headers = new HttpHeaders().set('Content-Type', 'application/json');
 

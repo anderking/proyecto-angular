@@ -191,7 +191,7 @@ article.about{
 }
 
 form{
-	width: 80%;
+	width: 100%;
 	margin:auto;
 }
 
@@ -225,6 +225,12 @@ form input[type="reset"],
 	background: rgba(53, 103, 164, 1);
 	border: 1px solid rgba(13, 67, 133, 1);
 	cursor: pointer;
+}
+
+form input[type="submit"],
+form input[type="reset"]{
+	display: inline !important;
+	margin-right: 10px;
 }
 
 .button-edit,

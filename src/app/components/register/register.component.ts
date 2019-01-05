@@ -5,6 +5,7 @@ import { UserService } from '../../services/user.service';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { auth } from 'firebase/app';
 import { Router, ActivatedRoute, Params } from '@angular/router';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-register',
@@ -37,16 +38,22 @@ export class RegisterComponent implements OnInit {
       {   
         this.resID = res.user._id;
         localStorage.setItem('token',res.token);
-        //this.loginRedirect();
+        localStorage.setItem('resID', res.user._id);
+        this.loginRedirect();
       },
       err => {
-      	console.log(err);
+        if(err instanceof HttpErrorResponse){
+          if(err.status===404){
+            alert(err.error.message);
+          }
+        }
       }
     );
   }
 	
 	loginRedirect(){
-    	this._router.navigate(['/user/'+this.resID+'']);
+    	//this._router.navigate(['/user/'+this.resID+'']);
+      window.location.replace('http://localhost:4200/user/'+this.resID);
   	}
 
 }

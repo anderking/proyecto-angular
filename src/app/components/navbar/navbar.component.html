@@ -1,12 +1,25 @@
 <header>
-	<ul>
+<!-- 	<ul *ngIf="isLogged=='true' ">
 		<li><a [routerLink]="['/login']" [routerLinkActive]="['actived']" *ngIf="!isLogged">Login</a></li>
 		<li><a [routerLink]="['/register']" [routerLinkActive]="['actived']" *ngIf="!isLogged">Register</a></li>
-		<li><a [routerLink]="['/events']" [routerLinkActive]="['actived']" *ngIf="!isLogged">Events</a></li>
 		<li><a [routerLink]="['/user/5c2bdb75a977691b5c41ec26']" [routerLinkActive]="['actived']" *ngIf="isLogged">Perfil</a></li>
 		<li><a [routerLink]="['/proyectos']" [routerLinkActive]="['actived']" *ngIf="isLogged">Proyectos</a></li>
 		<li id="logo" *ngIf="isLogged">Angular</li>
 		<li><a [routerLink]="['/crear-proyectos']" [routerLinkActive]="['actived']" *ngIf="isLogged">Crear Proyectos</a></li>
 		<li><a [routerLink]="['/editar-user/5c2bdb75a977691b5c41ec26']" [routerLinkActive]="['actived']" *ngIf="isLogged">Configurar</a></li>
+	</ul> -->
+
+
+	<ul>
+
+		<li><a [routerLink]="['/login']" [routerLinkActive]="['actived']" *ngIf="!_authService.loggedIn()">Login</a></li>
+		<li><a [routerLink]="['/register']" [routerLinkActive]="['actived']" *ngIf="!_authService.loggedIn()">Register</a></li>
+
+		<li><a [routerLink]="['/user/', resID]" [routerLinkActive]="['actived']" *ngIf="_authService.loggedIn()">Perfil</a></li>
+		<li><a [routerLink]="['/proyectos/',resID]" [routerLinkActive]="['actived']" *ngIf="_authService.loggedIn()">Proyectos</a></li>
+		<li id="logo" *ngIf="_authService.loggedIn()" >Angular</li>
+		<li><a [routerLink]="['/crear-proyectos']" [routerLinkActive]="['actived']" *ngIf="_authService.loggedIn()">Crear Proyectos</a></li>
+		<li><a [routerLink]="['/editar-user/',resID]" [routerLinkActive]="['actived']" *ngIf="_authService.loggedIn()">Configurar</a></li>
 	</ul>
+
 </header>

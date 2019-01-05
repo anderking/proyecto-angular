@@ -17,7 +17,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { AppComponent } from './app.component';
-import { AboutComponent } from './components/about/about.component';
 import { CreateComponent } from './components/create/create.component';
 import { ProjectsComponent } from './components/projects/projects.component';
 import { ErrorComponent } from './components/error/error.component';
@@ -28,12 +27,12 @@ import { UsersComponent } from './components/users/users.component';
 import { EdituserComponent } from './components/edituser/edituser.component';
 import { CreateuserComponent } from './components/createuser/createuser.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
-import { EventsComponent } from './components/events/events.component';
+import { ProjectsusersComponent } from './components/projectsusers/projectsusers.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    AboutComponent,
     CreateComponent,
     ProjectsComponent,
     ErrorComponent,
@@ -46,7 +45,7 @@ import { EventsComponent } from './components/events/events.component';
     LoginComponent,
     RegisterComponent,
     NavbarComponent,
-    EventsComponent
+    ProjectsusersComponent,
   ],
   imports: [
     BrowserModule,

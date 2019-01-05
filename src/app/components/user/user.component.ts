@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from '../../models/user'; //Importo el modelo
 import { UserService } from '../../services/user.service';
-import { Global } from '../../services/global';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/auth';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-user',
@@ -21,6 +21,7 @@ export class UserComponent implements OnInit {
 		private _route: ActivatedRoute,
 		private _router: Router,
 		public afAuth: AngularFireAuth,
+		private _authService: AuthService
 	)
 	{
 		
@@ -28,6 +29,7 @@ export class UserComponent implements OnInit {
 
 	ngOnInit()
 	{
+		//this.logoutRedes();
 		this._route.params.subscribe
 		(
 			params =>
@@ -36,7 +38,6 @@ export class UserComponent implements OnInit {
 				this.getUser(id);
 			}
 		);
-		//this.logout();
 	}
 
 	getUser(id)
@@ -55,9 +56,16 @@ export class UserComponent implements OnInit {
 		)
 	}
 
-  logout() {
-    this.afAuth.auth.signOut();
-    this._router.navigate(['/login']);
-  }
+	logoutRedes() {
+		this.afAuth.auth.signOut();
+	    this._router.navigate(['/login']);
+	}
+	
+	logoutToken(){
+	  	//this._authService.logoutUserToken();
+	  	//this._authService.logoutUserResID();
+	  	this._authService.logoutClear();
+	  	this._router.navigate(['/login']);
+	}
 
 }
