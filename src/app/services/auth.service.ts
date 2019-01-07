@@ -29,9 +29,9 @@ export class AuthService{
 	    return this._http.post(this.url+'signin', { email: email, password: password });     
 	}
 
-	register(email:string, password:string): Observable<any>
+	register(email:string, password:string, tipo:string): Observable<any>
 	{
-	    return this._http.post(this.url+'signup', { email: email, password: password });     
+	    return this._http.post(this.url+'signup', { email: email, password: password, tipo: tipo });     
 	}
 
 	getToken() {

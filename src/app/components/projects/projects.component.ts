@@ -16,7 +16,6 @@ export class ProjectsComponent implements OnInit {
 	public url:string;
 	public total:number=0;
 	public userID:string;
-	public nameUser:string;
 
 	constructor
 	(
@@ -28,7 +27,6 @@ export class ProjectsComponent implements OnInit {
 	{
 		this.url = Global.url;
 		this.userID = localStorage.getItem('resID');
-		console.log(this.userID);
 	}
 	ngOnInit()
 	{
@@ -42,7 +40,6 @@ export class ProjectsComponent implements OnInit {
 		(
 			response =>
 			{
-				this.nameUser = response.user.name;
 			},
 			error =>
 			{
@@ -57,11 +54,9 @@ export class ProjectsComponent implements OnInit {
 		(
 			response =>
 			{
-				console.log(response);
 				if(response.projects)
 				{
 					this.projects = response.projects;
-					console.log(this.projects);
 					this.total = this.projects.length;
 				}
 			},

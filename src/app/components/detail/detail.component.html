@@ -13,8 +13,8 @@
 		<p>{{project.langs}}</p>
 		<p>{{project.year}}</p>
 		<p *ngIf="confirm == false">
-			<button [routerLink]="['/editar-proyecto', project._id]" class="button-edit">Editar</button>
-			<button (click)="setConfirm(true)" class="button-delete">Borrar</button>
+			<button *ngIf=" user.tipo=='member' || user.tipo=='admin' " [routerLink]="['/proyectos/edit', project._id]" class="button-edit">Editar</button>
+			<button *ngIf=" user.tipo=='member' || user.tipo=='admin' " (click)="setConfirm(true)" class="button-delete">Borrar</button>
 		</p>
 
 		<p *ngIf="confirm == true">
@@ -23,7 +23,9 @@
 			<button (click)="deleteProject(project._id)" class="button-delete">Si</button>
 		</p>
 		<p *ngIf="confirm == false">
-			<button [routerLink]="['/proyectos/',resID]" class=" center button-primary">Regresar</button>
+			<button *ngIf=" user.tipo=='member' " [routerLink]="['/proyectos/user/',resID]" class="center button-primary">Regresar</button>
+			<button *ngIf=" user.tipo=='client' || user.tipo=='admin' " [routerLink]="['/proyectos/']" class="center button-primary">Regresar</button>
+
 		</p>
 	</div>
 </div>

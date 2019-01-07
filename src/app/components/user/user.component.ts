@@ -4,16 +4,22 @@ import { UserService } from '../../services/user.service';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AuthService } from '../../services/auth.service';
+import { UploadService } from '../../services/upload.service';
+import { Global } from '../../services/global';
 
 @Component({
   selector: 'app-user',
   templateUrl: './user.component.html',
   styleUrls: ['./user.component.css'],
-  providers:[UserService]
+  providers:[UserService,UploadService]
 })
 export class UserComponent implements OnInit {
 
 	public user: User;
+	public rutaResID:string;
+	public rutaActual:string;
+	public filesToUpload: Array<File>;
+	public url: string;
 
 	constructor
 	(
@@ -21,9 +27,16 @@ export class UserComponent implements OnInit {
 		private _route: ActivatedRoute,
 		private _router: Router,
 		public afAuth: AngularFireAuth,
-		private _authService: AuthService
+		private _authService: AuthService,
+		private _uploadService: UploadService,
+
 	)
 	{
+		this.rutaResID="/perfil/"+localStorage.getItem('resID');
+		this.rutaActual = this._router.url;
+		this.url = Global.url;
+		
+		
 		
 	}
 
@@ -68,4 +81,40 @@ export class UserComponent implements OnInit {
 	  	this._router.navigate(['/login']);
 	}
 
+	onSubmit()
+	{
+		this._userService.updateUser(this.user).subscribe
+		(
+			response =>
+			{
+				if(response.user)
+				{	
+					if(this.filesToUpload)
+					{
+						this._uploadService.makeFileRequest(Global.url+"upload-image-user/"+response.user._id, [], this.filesToUpload, 'image')
+						.then
+						(
+							(result:any) =>
+							{
+								this._router.navigate(['/perfil/'+this.user._id]);
+							}
+						);
+					}
+					else
+					{
+						this._router.navigate(['/perfil/'+this.user._id]);
+					}
+				}
+			},
+			error =>
+			{
+				console.log(<any>error);
+			}
+		);
+	}
+
+	fileChangeEvent(fileInput: any)
+	{
+		this.filesToUpload = <Array<File>>fileInput.target.files;
+	}
 }

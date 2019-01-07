@@ -1,0 +1,18 @@
+<div class="container" *ngIf="user">
+
+	<div class="image" >
+		<img src="https://cdn0.iconfinder.com/data/icons/user-pictures/100/matureman1-512.png"/>
+	</div>
+	
+	<div class="data">
+		<h1>Nombre: {{user.name}}</h1>
+		<h3>Descripcion: {{user.description}}</h3>
+		<h3>Trabajo: {{user.job}}</h3>
+		<h3>Web:{{user.web}}</h3>
+		<h3>Proyectos {{ total }}</h3>
+		<ul>
+			<li *ngFor="let project of projects"><a [routerLink]="['/proyectos/show', project._id] ">{{ project.name}}</a></li>
+		</ul>
+	</div>
+
+</div>

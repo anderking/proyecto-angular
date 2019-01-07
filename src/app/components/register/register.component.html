@@ -18,9 +18,12 @@
         El password es obligatorio
       </span>-->
     </p>
+    <input type="hidden" name="tipo" required value="admin">
 
     <input type="submit" value="Register" [disabled]="!registerForm.form.valid"/>
+    
     <input type="reset" value="Cancelar">
+
     
     <a [routerLink]="['/login']" >¿Ya tienes una cuenta?</a>
   

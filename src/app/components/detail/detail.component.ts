@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Project } from '../../models/project'; //Importo el modelo
 import { ProjectService } from '../../services/project.service'; //Importo el servicio que tiene las funciones de crear
+import { User } from '../../models/user'; //Importo el modelo
+import { UserService } from '../../services/user.service';
 import { Global } from '../../services/global'; // Para usar la conexion url de la api en este componente directamente
 import { Router, ActivatedRoute, Params } from '@angular/router';//Para poder cargar las rutas
 
@@ -13,6 +15,7 @@ import { Router, ActivatedRoute, Params } from '@angular/router';//Para poder ca
 })
 export class DetailComponent implements OnInit {
 	
+	public user: User;
 	public url: string;
 	public project: Project;
 	public confirm: boolean;
@@ -21,6 +24,7 @@ export class DetailComponent implements OnInit {
 	constructor
 	(
 		private _projectService: ProjectService,
+		private _userService: UserService,
 		private _router: Router,
 		private _route: ActivatedRoute
 
@@ -29,7 +33,6 @@ export class DetailComponent implements OnInit {
 		this.url = Global.url;
     	this.confirm = false;
 		this.resID = localStorage.getItem('resID');
-    	console.log(this.url);
 	}
 
 	ngOnInit()
@@ -41,7 +44,9 @@ export class DetailComponent implements OnInit {
 				let id = params.id;
 				this.getProject(id);
 			}
-		)
+		);
+		this.getUser(this.resID);
+
 	}
 
 	getProject(id)
@@ -56,6 +61,22 @@ export class DetailComponent implements OnInit {
 			{
 				console.log(<any>error);
 			}
+		);
+	}
+
+	getUser(id)
+	{
+		this._userService.getUser(id).subscribe
+		(
+			response =>
+			{
+				this.user = response.user;
+				console.log(this.user);
+			},
+			error =>
+			{
+				console.log(<any>error);
+			}
 		)
 	}
 
@@ -63,7 +84,15 @@ export class DetailComponent implements OnInit {
 		this._projectService.deleteProject(id).subscribe(
 			response => {
 				if(response.project){
-					this._router.navigate(['/proyectos']);
+					if(this.user.tipo=="member")
+					{
+						this._router.navigate(['/proyectos/'+this.user._id+'']);
+					}
+
+					if(this.user.tipo=="admin")
+					{
+						this._router.navigate(['/proyectos/']);
+					}
 				}
 			},
 			error => {

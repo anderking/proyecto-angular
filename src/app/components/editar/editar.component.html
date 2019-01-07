@@ -58,5 +58,5 @@
 
 		<input type="submit" value="Actualizar" [disabled]="!projectForm.form.valid" />
 	</form>
-		<button [routerLink]="['/proyecto', project._id]" class=" center button-primary">Regresar</button>
+		<button *ngIf="user.tipo=='member' || user.tipo=='admin' " [routerLink]="['/proyectos/show', project._id]" class=" center button-primary">Regresar</button>
 </div>

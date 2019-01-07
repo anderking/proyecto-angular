@@ -3,6 +3,8 @@ import { AuthService } from '../../services/auth.service';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { UserService } from '../../services/user.service';
+import { User } from '../../models/user'; //Importo el modelo
 
 @Component({
   selector: 'app-navbar',
@@ -10,26 +12,29 @@ import { Router } from '@angular/router';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
-
+	
+	public user: User;
 	public isLogged:any;
 	public resID:string;
+	public tipo:string;
 	
 	constructor
 	(
 		private afAuth: AngularFireAuth,
 		private _authService: AuthService,
-		private _router: Router
+		private _router: Router,
+		private _userService: UserService,
+
 	)
 	{
 	}
 
-	ngOnInit() {
-		this._authService.logoutUser();
-
+	ngOnInit()
+	{
 	    if ( localStorage.getItem('resID') )
 	    {
-	      console.log(localStorage.getItem('resID'));
 	      this.resID = localStorage.getItem('resID');
+	      this.getUser(this.resID);
 	    }
 	    else
 	    {
@@ -40,21 +45,13 @@ export class NavbarComponent implements OnInit {
 
 	}
 
-	getCurrentUser()
+	getUser(id)
 	{
-		this._authService.isAuth().subscribe
+		this._userService.getUser(id).subscribe
 		(
 			response =>
 			{
-				if(response){
-					console.log('LOGEADO');
-					this.isLogged = "true";
-				}
-				else
-				{
-					console.log('NO LOGEADO');
-					this.isLogged = "false";	
-				}
+				this.tipo = response.user.tipo;
 			},
 			error =>
 			{

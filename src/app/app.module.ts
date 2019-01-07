@@ -10,8 +10,9 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { AuthService } from './services/auth.service';
 import { UserService } from './services/user.service';
 import { TokenInterceptorService } from './services/token-interceptor.service';
-import { EventService } from './services/event.service';
 
+import { ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
 import { LoginComponent } from './components/login/login.component';
@@ -28,6 +29,9 @@ import { EdituserComponent } from './components/edituser/edituser.component';
 import { CreateuserComponent } from './components/createuser/createuser.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { ProjectsusersComponent } from './components/projectsusers/projectsusers.component';
+import { PerfilComponent } from './components/perfil/perfil.component';
+import { MensajesComponent } from './components/mensajes/mensajes.component';
+import { UsersshowComponent } from './components/usersshow/usersshow.component';
 
 
 @NgModule({
@@ -46,6 +50,9 @@ import { ProjectsusersComponent } from './components/projectsusers/projectsusers
     RegisterComponent,
     NavbarComponent,
     ProjectsusersComponent,
+    PerfilComponent,
+    MensajesComponent,
+    UsersshowComponent,
   ],
   imports: [
     BrowserModule,
@@ -55,7 +62,14 @@ import { ProjectsusersComponent } from './components/projectsusers/projectsusers
     FormsModule,
     ReactiveFormsModule,
     AngularFireModule.initializeApp(environment.fireBaseConfig),
-    AngularFireDatabaseModule
+    AngularFireDatabaseModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot({
+    timeOut: 5000,
+    positionClass: 'toast-bottom-right',
+    preventDuplicates: true,
+    closeButton:true
+  })
   ],
   providers:
   [
@@ -63,7 +77,6 @@ import { ProjectsusersComponent } from './components/projectsusers/projectsusers
     AngularFireAuth,
     AuthService,
     UserService,
-    EventService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass : TokenInterceptorService,

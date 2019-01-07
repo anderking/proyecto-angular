@@ -6,6 +6,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { auth } from 'firebase/app';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-register',
@@ -18,13 +19,16 @@ export class RegisterComponent implements OnInit {
 	public user : User;
 	public email:string;
 	public password:string;
+  public tipo:string="admin";
 	public resID:string;
 	
 	constructor
 	(
 		private _router: Router,
 		private authService: AuthService,
-		private _userService: UserService
+		private _userService: UserService,
+    private toastr: ToastrService
+
 	)
 	{
 	}
@@ -33,7 +37,7 @@ export class RegisterComponent implements OnInit {
 	}
 
   register() {
-     this.authService.register(this.email,this.password).subscribe(
+     this.authService.register(this.email,this.password,this.tipo).subscribe(
       res =>
       {   
         this.resID = res.user._id;
@@ -44,7 +48,7 @@ export class RegisterComponent implements OnInit {
       err => {
         if(err instanceof HttpErrorResponse){
           if(err.status===404){
-            alert(err.error.message);
+            this.toastr.error(err.error.message, 'Error!');
           }
         }
       }
@@ -53,7 +57,7 @@ export class RegisterComponent implements OnInit {
 	
 	loginRedirect(){
     	//this._router.navigate(['/user/'+this.resID+'']);
-      window.location.replace('http://localhost:4200/user/'+this.resID);
+      window.location.replace('http://localhost:4200/perfil/'+this.resID);
   	}
 
 }

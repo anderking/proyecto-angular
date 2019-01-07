@@ -66,7 +66,7 @@ export class EdituserComponent implements OnInit {
 				{
 					this.update_user = response.user;
 					this.status = 'success';
-					this._router.navigate(['/editar-user/'+this.user._id]);
+					this._router.navigate(['/perfil/'+this.user._id]);
 					console.log(this.update_user);	
 				}
 				else

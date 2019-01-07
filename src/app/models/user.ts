@@ -6,6 +6,8 @@ export class User{
 		public name: string,
 		public job: string,
 		public web: string,
-		public description: string
+		public description: string,
+		public userID:string,
+		public tipo:string,
 	){}
 }

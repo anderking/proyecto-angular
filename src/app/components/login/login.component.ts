@@ -1,14 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { UserService } from '../../services/user.service';
-
 import { HttpErrorResponse } from '@angular/common/http';
-
 import { User } from '../../models/user';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { auth } from 'firebase/app';
 import { Router, ActivatedRoute, Params } from '@angular/router';
-
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',
@@ -28,7 +26,8 @@ export class LoginComponent implements OnInit {
     public afAuth: AngularFireAuth,
     private _router: Router,
     private authService: AuthService,
-    private userService: UserService
+    private userService: UserService,
+    private toastr: ToastrService
    )
   {
     
@@ -51,7 +50,8 @@ export class LoginComponent implements OnInit {
       err => {
         if(err instanceof HttpErrorResponse){
           if(err.status===404){
-            alert(err.error.message);
+            this.toastr.error(err.error.message, 'Error!');
+            //alert(err.error.message);
           }
         }
       }
@@ -91,7 +91,7 @@ export class LoginComponent implements OnInit {
   loginRedirect(){
     //this._router.navigate(['/user/'+this.resID+'']);
     //this._router.navigateByUrl('/user/'+this.resID+'');
-    window.location.replace('http://localhost:4200/user/'+this.resID);
+    window.location.replace('http://localhost:4200/perfil/'+this.resID);
   }
 
 }
