@@ -22,44 +22,54 @@ import { ProjectsusersComponent } from './components/projectsusers/projectsusers
 import { PerfilComponent } from './components/perfil/perfil.component';
 import { MensajesComponent } from './components/mensajes/mensajes.component';
 import { UsersshowComponent } from './components/usersshow/usersshow.component';
+import { ProjectspadreComponent } from './components/projectspadre/projectspadre.component';
 
+import { UserspadreComponent } from './components/userspadre/userspadre.component';
+import { LoginspinnerComponent } from './components/loginspinner/loginspinner.component';
 
 
 import { AuthGuard } from './auth.guard';
+import { RoleGuard } from './role.guard';
+import { RestringidoComponent } from './components/restringido/restringido.component';
 
 // Array de rutas
 const appRoutes: Routes = [
 
 	{path: '', redirectTo: 'login', pathMatch: 'full'},
 	{path: 'login', component: LoginComponent},
+	{path: 'spinner', component: LoginspinnerComponent},
 	{path: 'register', component: RegisterComponent},
 	
 	{path: 'perfil/:id', component: UserComponent, canActivate: [AuthGuard] ,
 		children:
 		[
+			{path: '', component: PerfilComponent, canActivate: [AuthGuard]},
 			{path: 'edit/:id', component: EdituserComponent, canActivate: [AuthGuard]},
 		]
 
 	},
 	
-	{path: 'proyectos', component: ProjectsComponent, canActivate: [AuthGuard],
+	{path: 'proyectos', component: ProjectspadreComponent, canActivate: [],
 		children:
 		[
+			{path: '', component: ProjectsComponent, canActivate: [AuthGuard],canActivateChild: [AuthGuard]},
 			{path: 'user/:id', component: ProjectsusersComponent, canActivate: [AuthGuard]},
 			{path: 'show/:id', component: DetailComponent, canActivate: [AuthGuard]},
-			{path: 'create', component: CreateComponent, canActivate: [AuthGuard]},
-			{path: 'edit/:id', component: EditarComponent, canActivate: [AuthGuard]},
+			{path: 'create', component: CreateComponent, canActivate: [AuthGuard,RoleGuard]},
+			{path: 'edit/:id', component: EditarComponent, canActivate: [AuthGuard,RoleGuard]},
 		]
 	},
 	
-	{path: 'users', component: UsersComponent, canActivate: [AuthGuard],
+	{path: 'users', component: UserspadreComponent, canActivate: [AuthGuard],
 		children:
 		[
-			{path: 'show/:id', component: UsersshowComponent, canActivate: [AuthGuard]},
+			{path: '', component: UsersComponent, canActivate: [AuthGuard,RoleGuard]},
+			{path: 'show/:id', component: UsersshowComponent, canActivate: [AuthGuard,RoleGuard]},
 		]
 	},
 	
-	{path: '**', component: ErrorComponent}
+	{path: 'restringido', component: RestringidoComponent},
+	{path: '**', component: ErrorComponent},
 
 ];
 

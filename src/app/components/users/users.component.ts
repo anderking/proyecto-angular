@@ -3,6 +3,7 @@ import { User } from '../../models/user';
 import { UserService } from '../../services/user.service';
 import { Project } from '../../models/project';
 import { ProjectService } from '../../services/project.service';
+import { Global } from '../../services/global';
 
 @Component({
   selector: 'app-users',
@@ -17,6 +18,7 @@ export class UsersComponent implements OnInit {
 	public projects: any;
 	public total:number=0;
 	public userID:string;
+	public url: string;
 
 	constructor
 	(
@@ -25,6 +27,8 @@ export class UsersComponent implements OnInit {
 	)
 	{
 		this.userID = localStorage.getItem('resID');
+		this.url = Global.url;
+
 	}
 	ngOnInit()
 	{
@@ -39,7 +43,6 @@ export class UsersComponent implements OnInit {
 			response =>
 			{
 				this.projects = response.projects;
-				this.total = this.projects.length;
 			},
 			error =>
 			{
@@ -57,6 +60,7 @@ export class UsersComponent implements OnInit {
 				if(response.users)
 				{
 					this.users = response.users;
+					this.total = this.users.length;
 				}
 			},
 			error => 

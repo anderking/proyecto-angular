@@ -4,6 +4,7 @@ import { UserService } from '../../services/user.service';
 import { UploadService } from '../../services/upload.service';
 import { Global } from '../../services/global';
 import { Router, ActivatedRoute, Params } from '@angular/router';
+import {Location} from '@angular/common';
 
 @Component({
   selector: 'app-edituser',
@@ -22,7 +23,8 @@ export class EdituserComponent implements OnInit {
 	(
 		private _userService: UserService,
 		private _route: ActivatedRoute,
-		private _router: Router
+		private _router: Router,
+		private _location: Location
 	)
 	{
 		
@@ -81,4 +83,7 @@ export class EdituserComponent implements OnInit {
 		);
 	}
 
+	goBack() { 
+     this._location.back(); 
+    }
 }

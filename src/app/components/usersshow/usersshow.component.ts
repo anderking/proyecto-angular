@@ -4,26 +4,33 @@ import { UserService } from '../../services/user.service';
 import { Project } from '../../models/project';
 import { ProjectService } from '../../services/project.service';
 import { Router, ActivatedRoute, Params } from '@angular/router';
+import { Global } from '../../services/global';
+import {Location} from '@angular/common'; 
 
 @Component({
   selector: 'app-usersshow',
   templateUrl: './usersshow.component.html',
   styleUrls: ['./usersshow.component.css'],
-  providers: [UserService]
+  providers: [UserService,ProjectService]
 })
 export class UsersshowComponent implements OnInit {
 
 	public user: User;
 	public projects: any;
 	public total:string;
+	public url: string;
 
 	constructor
 	(
 		private _userService: UserService,
 		private _projectService: ProjectService,
 		private _route: ActivatedRoute,
+		private _location: Location
+		
 	)
-	{		
+	{
+		this.url = Global.url;
+
 	}
 
 	ngOnInit()
@@ -74,5 +81,7 @@ export class UsersshowComponent implements OnInit {
 			}
 		);
 	}
-
+	goBack() { 
+     this._location.back(); 
+    }
 }

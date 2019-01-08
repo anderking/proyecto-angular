@@ -1,3 +1,40 @@
-<p>
-  perfil works!
-</p>
+<ngx-spinner
+bdColor = "rgba(51, 51, 51, 0.8)"
+size = "large"
+color = "#fff"
+type = "ball-clip-rotate"
+></ngx-spinner>
+<div *ngIf=" rutaActual == rutaResID ">
+	<div class="container" *ngIf="user">
+		<div id="title">
+			<div class="image">
+				<img src="{{url+'get-image-user/'+user.image}}" />
+			</div>
+			<h1 *ngIf="user.name">{{ user.name }}</h1>
+			<div id="datos">
+				<h2 *ngIf="user.job">{{ user.job }}</h2>
+				<p *ngIf="user.web">{{ user.web }}</p>
+				
+				
+					<form #userForm="ngForm" (ngSubmit)="onSubmit(userForm)">
+						<label style="margin-right: 10px;" for="image">Imagen de perfil</label>
+						<input type="file" name="image" placeholder="Subir imagen" (change)="fileChangeEvent($event)"/>
+						<input type="submit" value="Cambiar" />
+
+					</form>
+				
+					
+				<h1 *ngIf="!user.name">Actualice sus datos</h1>
+				<h2 *ngIf="!user.job">Actualice sus datos</h2>
+				<p *ngIf="!user.web">Actualice sus datos</p>
+			</div>
+		</div>
+		<article class="about">
+			<h2 class="center">Sobre mi - Tipo: {{ user.tipo }}</h2>
+			<p *ngIf="user.description">{{ user.description }}</p>
+			<p *ngIf="!user.description">Actualice sus datos</p>
+			<button [routerLink]="['/perfil/'+user._id+'/edit',user._id]" class=" center button-primary">Editar Información</button>
+			<button (click)="logoutToken()" class="button-primary">Cerrar Sesión</button>
+		</article>
+	</div>
+</div>

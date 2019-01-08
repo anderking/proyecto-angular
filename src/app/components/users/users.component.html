@@ -5,7 +5,7 @@
 		<li *ngFor="let user of users" class="project">
 			<a [routerLink]="['/users/show', user._id]">
 				<div class="image">
-					<img src="https://cdn0.iconfinder.com/data/icons/user-pictures/100/matureman1-512.png" />
+					<img src="{{url+'get-image-user/'+user.image}}" />
 				</div>
 				<h2>{{ user.name }}</h2>
 				<h3>{{ user.tipo }}</h3>

@@ -89,9 +89,8 @@ export class LoginComponent implements OnInit {
   }
 
   loginRedirect(){
-    //this._router.navigate(['/user/'+this.resID+'']);
-    //this._router.navigateByUrl('/user/'+this.resID+'');
-    window.location.replace('http://localhost:4200/perfil/'+this.resID);
+    this._router.navigate(['/spinner/']);
+    //window.location.replace('http://localhost:4200/spinner/');
   }
 
 }

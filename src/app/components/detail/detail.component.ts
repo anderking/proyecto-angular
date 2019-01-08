@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { Project } from '../../models/project'; //Importo el modelo
-import { ProjectService } from '../../services/project.service'; //Importo el servicio que tiene las funciones de crear
-import { User } from '../../models/user'; //Importo el modelo
+import { Project } from '../../models/project';
+import { ProjectService } from '../../services/project.service';
+import { User } from '../../models/user';
 import { UserService } from '../../services/user.service';
-import { Global } from '../../services/global'; // Para usar la conexion url de la api en este componente directamente
-import { Router, ActivatedRoute, Params } from '@angular/router';//Para poder cargar las rutas
-
+import { Global } from '../../services/global';
+import { Router, ActivatedRoute, Params } from '@angular/router';
+import {Location} from '@angular/common';
 
 @Component({ 
   selector: 'app-detail',
@@ -26,7 +26,9 @@ export class DetailComponent implements OnInit {
 		private _projectService: ProjectService,
 		private _userService: UserService,
 		private _router: Router,
-		private _route: ActivatedRoute
+		private _route: ActivatedRoute,
+		private _location: Location
+
 
 	)
 	{
@@ -86,7 +88,7 @@ export class DetailComponent implements OnInit {
 				if(response.project){
 					if(this.user.tipo=="member")
 					{
-						this._router.navigate(['/proyectos/'+this.user._id+'']);
+						this._router.navigate(['/proyectos/user/'+this.user._id+'']);
 					}
 
 					if(this.user.tipo=="admin")
@@ -105,6 +107,9 @@ export class DetailComponent implements OnInit {
 	{
 		this.confirm = confirm;
 	}
-
+	
+	goBack() { 
+     this._location.back(); 
+    }
 
 }

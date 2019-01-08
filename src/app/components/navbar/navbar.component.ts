@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { HttpErrorResponse } from '@angular/common/http';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute, Params } from '@angular/router';
 import { UserService } from '../../services/user.service';
 import { User } from '../../models/user'; //Importo el modelo
 
@@ -17,16 +17,21 @@ export class NavbarComponent implements OnInit {
 	public isLogged:any;
 	public resID:string;
 	public tipo:string;
+	public rutaActual:string;
 	
 	constructor
 	(
 		private afAuth: AngularFireAuth,
 		private _authService: AuthService,
 		private _router: Router,
+		private _route: ActivatedRoute,
+
 		private _userService: UserService,
 
 	)
 	{
+		this.rutaActual = this._router.url;
+		console.log(this.rutaActual)
 	}
 
 	ngOnInit()

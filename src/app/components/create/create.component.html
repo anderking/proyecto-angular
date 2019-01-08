@@ -5,7 +5,7 @@
 		
 		<div class="message success" *ngIf="status == 'success'">
 			El proyecto se ha creado correctamente, puedes
-			<a [routerLink]="['/proyecto', save_project._id]">verlo aquí</a>
+			<a [routerLink]="['/proyectos/show', save_project._id]">verlo aquí</a>
 		</div>
 
 		<div class="message failed" *ngIf="status == 'failed'">

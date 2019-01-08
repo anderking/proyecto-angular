@@ -13,6 +13,7 @@ import { TokenInterceptorService } from './services/token-interceptor.service';
 
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 import { AppRoutingModule } from './app-routing.module';
 import { LoginComponent } from './components/login/login.component';
@@ -32,6 +33,10 @@ import { ProjectsusersComponent } from './components/projectsusers/projectsusers
 import { PerfilComponent } from './components/perfil/perfil.component';
 import { MensajesComponent } from './components/mensajes/mensajes.component';
 import { UsersshowComponent } from './components/usersshow/usersshow.component';
+import { ProjectspadreComponent } from './components/projectspadre/projectspadre.component';
+import { UserspadreComponent } from './components/userspadre/userspadre.component';
+import { LoginspinnerComponent } from './components/loginspinner/loginspinner.component';
+import { RestringidoComponent } from './components/restringido/restringido.component';
 
 
 @NgModule({
@@ -53,6 +58,10 @@ import { UsersshowComponent } from './components/usersshow/usersshow.component';
     PerfilComponent,
     MensajesComponent,
     UsersshowComponent,
+    ProjectspadreComponent,
+    UserspadreComponent,
+    LoginspinnerComponent,
+    RestringidoComponent,
   ],
   imports: [
     BrowserModule,
@@ -64,12 +73,13 @@ import { UsersshowComponent } from './components/usersshow/usersshow.component';
     AngularFireModule.initializeApp(environment.fireBaseConfig),
     AngularFireDatabaseModule,
     BrowserAnimationsModule,
+    NgxSpinnerModule,
     ToastrModule.forRoot({
-    timeOut: 5000,
-    positionClass: 'toast-bottom-right',
-    preventDuplicates: true,
-    closeButton:true
-  })
+      timeOut: 5000,
+      positionClass: 'toast-bottom-right',
+      preventDuplicates: true,
+      closeButton:true
+    })
   ],
   providers:
   [

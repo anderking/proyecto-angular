@@ -340,3 +340,11 @@ form input[disabled]{
 .center{
 	text-align: center;
 }
+
+#title .image img{
+	float: none;
+	margin:auto;
+	height: 300px;
+	width: 300px;
+	border-radius: 150px !important;
+}
