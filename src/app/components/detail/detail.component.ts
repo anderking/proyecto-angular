@@ -6,12 +6,14 @@ import { UserService } from '../../services/user.service';
 import { Global } from '../../services/global';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import {Location} from '@angular/common';
+import { LikeService } from '../../services/like.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({ 
   selector: 'app-detail',
   templateUrl: './detail.component.html',
   styleUrls: ['./detail.component.css'],
-  providers:[ProjectService]
+  providers:[ProjectService,LikeService]
 })
 export class DetailComponent implements OnInit {
 	
@@ -20,11 +22,14 @@ export class DetailComponent implements OnInit {
 	public project: Project;
 	public confirm: boolean;
 	public resID:string;
+	public likes:number=0;
+	public likebool:boolean=false;
 
 	constructor
 	(
 		private _projectService: ProjectService,
 		private _userService: UserService,
+		private _likeService: LikeService,
 		private _router: Router,
 		private _route: ActivatedRoute,
 		private _location: Location
@@ -45,6 +50,8 @@ export class DetailComponent implements OnInit {
 			{
 				let id = params.id;
 				this.getProject(id);
+				this.getLikes(id);
+				this.islike(id)
 			}
 		);
 		this.getUser(this.resID);
@@ -82,6 +89,38 @@ export class DetailComponent implements OnInit {
 		)
 	}
 
+	getLikes(id)
+	{
+		this._likeService.getLikes(id).subscribe
+		(
+			response =>
+			{
+				this.likes = response.likes.length;
+			},
+			error =>
+			{
+				console.log(<any>error);
+			}
+		)
+	}
+
+    islike(id){
+    	this._likeService.isLike(id,this.resID).subscribe(
+			response =>
+			{
+				if(response)
+          			this.likebool=true;
+          		else
+          			this.likebool=false;
+					
+			},
+			error =>
+			{
+				console.log(<any>error);
+			}
+		);
+    }
+
 	deleteProject(id){
 		this._projectService.deleteProject(id).subscribe(
 			response => {
@@ -111,5 +150,34 @@ export class DetailComponent implements OnInit {
 	goBack() { 
      this._location.back(); 
     }
+
+    upLikes(){
+    	this._likeService.upLikes(this.project._id,this.resID).subscribe(
+    		response =>
+			{
+				this._router.navigate(['/**/'])
+    				.then(()=>{this._router.navigate(['/proyectos/show/'+this.project._id])})
+			},
+			error =>
+			{
+				console.log(<any>error);
+			}
+    	);
+    }
+
+    disLikes(){
+    	this._likeService.disLikes(this.project._id,this.resID).subscribe(
+    		response =>
+			{
+				this._router.navigate(['/**/'])
+    				.then(()=>{this._router.navigate(['/proyectos/show/'+this.project._id])})
+			},
+			error =>
+			{
+				console.log(<any>error);
+			}
+    	);
+    }
+
 
 }

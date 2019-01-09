@@ -7,6 +7,6 @@ export class Project{
 		public year: number,
 		public langs: string,
 		public image: string,
-		public userID:string
+		public userID:string,
 	){}
 }

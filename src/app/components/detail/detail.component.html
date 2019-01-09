@@ -26,8 +26,11 @@
 			<p *ngIf="confirm == false">
 				<button *ngIf=" user.tipo=='member' " [routerLink]="['/proyectos/user/',resID]" class="center button-primary">Regresar</button>
 				<button *ngIf=" user.tipo=='client' || user.tipo=='admin' " [routerLink]="['/proyectos/']" class="center button-primary">Regresar</button>
-			
 			</p>
+
+		<button class="center button-primary" *ngIf="!likebool" (click)="upLikes()" > Me gusta {{ likes }}</button>
+		<button class="center button-primary" *ngIf="likebool" (click)="disLikes()" > No me gusta: {{ likes }}</button>
 		</div>
 	</div>
+
 </div>

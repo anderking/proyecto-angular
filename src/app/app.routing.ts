@@ -43,28 +43,30 @@ const appRoutes: Routes = [
 	{path: 'perfil/:id', component: UserComponent, canActivate: [AuthGuard] ,
 		children:
 		[
-			{path: '', component: PerfilComponent, canActivate: [AuthGuard]},
-			{path: 'edit/:id', component: EdituserComponent, canActivate: [AuthGuard]},
+			{path: '', component: PerfilComponent},
+			{path: 'edit/:id', component: EdituserComponent},
 		]
 
 	},
 	
-	{path: 'proyectos', component: ProjectspadreComponent, canActivate: [],
+	{path: 'proyectos', component: ProjectspadreComponent, canActivate: [AuthGuard],
+		data: {id: localStorage.getItem('resID')},
 		children:
 		[
-			{path: '', component: ProjectsComponent, canActivate: [AuthGuard],canActivateChild: [AuthGuard]},
-			{path: 'user/:id', component: ProjectsusersComponent, canActivate: [AuthGuard]},
-			{path: 'show/:id', component: DetailComponent, canActivate: [AuthGuard]},
-			{path: 'create', component: CreateComponent, canActivate: [AuthGuard,RoleGuard]},
-			{path: 'edit/:id', component: EditarComponent, canActivate: [AuthGuard,RoleGuard]},
+			{path: '', component: ProjectsComponent},
+			{path: 'user/:id', component: ProjectsusersComponent},
+			{path: 'show/:id', component: DetailComponent},
+			{path: 'create', component: CreateComponent},
+			{path: 'edit/:id', component: EditarComponent},
 		]
 	},
 	
-	{path: 'users', component: UserspadreComponent, canActivate: [AuthGuard],
+	{path: 'users', component: UserspadreComponent, canActivate: [AuthGuard], canActivateChild: [AuthGuard],
+		data: {id: localStorage.getItem('resID')},
 		children:
 		[
-			{path: '', component: UsersComponent, canActivate: [AuthGuard,RoleGuard]},
-			{path: 'show/:id', component: UsersshowComponent, canActivate: [AuthGuard,RoleGuard]},
+			{path: '', component: UsersComponent},
+			{path: 'show/:id', component: UsersshowComponent},
 		]
 	},
 	

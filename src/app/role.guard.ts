@@ -10,7 +10,7 @@ import { AuthGuard } from './auth.guard';
 @Injectable({
   providedIn: 'root'
 })
-export class RoleGuard implements CanActivate {
+export class RoleGuard implements CanActivate{
 
   public user: User;
 
@@ -32,7 +32,6 @@ export class RoleGuard implements CanActivate {
       response =>
       {
         this.user = response.user;
-        console.log(this.user);
       },
       error =>
       {
@@ -42,21 +41,22 @@ export class RoleGuard implements CanActivate {
   }
 
 
- canActivate(): boolean
+ canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean
   {
+    console.log(this.user);
     if(this.user)
     {
-      if (this._authguard.canActivate())
-      {
-        if(this.user.tipo==="admin" || this.user.tipo==="member")
+        if(this.user.tipo=="admin" || this.user.tipo=="member")
         {
+          console.log("entro true en canactivate")
           return true
         }
-      }
+      
     }
     else
     {
       this._router.navigate(['/restringido'])
+      console.log("entro false en canactivate")
       return false
     }
   }

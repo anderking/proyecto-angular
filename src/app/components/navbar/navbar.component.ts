@@ -31,7 +31,6 @@ export class NavbarComponent implements OnInit {
 	)
 	{
 		this.rutaActual = this._router.url;
-		console.log(this.rutaActual)
 	}
 
 	ngOnInit()
