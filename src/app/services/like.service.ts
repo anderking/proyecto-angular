@@ -31,7 +31,7 @@ export class LikeService{
 		return this._http.get(this.url+'likes/'+id, {headers: headers});
 	}
 
-	isLike(projectID:string, userID:string): Observable<any>
+	isLike(userID:string, projectID:string): Observable<any>
 	{
 		return this._http.get(this.url+'islikes/'+userID+'/'+projectID);
 	}

@@ -80,7 +80,6 @@ export class DetailComponent implements OnInit {
 			response =>
 			{
 				this.user = response.user;
-				console.log(this.user);
 			},
 			error =>
 			{
@@ -105,7 +104,7 @@ export class DetailComponent implements OnInit {
 	}
 
     islike(id){
-    	this._likeService.isLike(id,this.resID).subscribe(
+    	this._likeService.isLike(this.resID,id).subscribe(
 			response =>
 			{
 				if(response)
@@ -155,8 +154,9 @@ export class DetailComponent implements OnInit {
     	this._likeService.upLikes(this.project._id,this.resID).subscribe(
     		response =>
 			{
-				this._router.navigate(['/**/'])
-    				.then(()=>{this._router.navigate(['/proyectos/show/'+this.project._id])})
+				this.getLikes(this.project._id);
+				this.islike(this.project._id);
+
 			},
 			error =>
 			{
@@ -169,8 +169,8 @@ export class DetailComponent implements OnInit {
     	this._likeService.disLikes(this.project._id,this.resID).subscribe(
     		response =>
 			{
-				this._router.navigate(['/**/'])
-    				.then(()=>{this._router.navigate(['/proyectos/show/'+this.project._id])})
+				this.getLikes(this.project._id);
+				this.islike(this.project._id);
 			},
 			error =>
 			{

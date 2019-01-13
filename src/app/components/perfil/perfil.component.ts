@@ -94,16 +94,15 @@ export class PerfilComponent implements OnInit {
 						(
 							(result:any) =>
 							{
-								this._router.navigate(['/**/'])
-    								.then(()=>{this._router.navigate(['/perfil/'+this.user._id])})
+								this.getUser(this.user._id);
 							}
 						);
-						this.spinner.show();
-						setTimeout( () => {this.spinner.hide();}, 100 );
+						//this.spinner.show();
+						//setTimeout( () => {this.spinner.hide();}, 100 );
 					}
 					else
 					{
-						this._router.navigate(['/perfil/'+this.user._id]);
+						this.getUser(this.user._id);
 					}
 				}
 			},

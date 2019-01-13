@@ -28,8 +28,9 @@
 				<button *ngIf=" user.tipo=='client' || user.tipo=='admin' " [routerLink]="['/proyectos/']" class="center button-primary">Regresar</button>
 			</p>
 
-		<button class="center button-primary" *ngIf="!likebool" (click)="upLikes()" > Me gusta {{ likes }}</button>
-		<button class="center button-primary" *ngIf="likebool" (click)="disLikes()" > No me gusta: {{ likes }}</button>
+		<button class="center button-primary" *ngIf="!likebool" (click)="upLikes()" > Me gusta</button>
+		<button class="center button-primary" *ngIf="likebool" (click)="disLikes()" > No me gusta</button>
+		<h1>{{ likes }}</h1>
 		</div>
 	</div>
 

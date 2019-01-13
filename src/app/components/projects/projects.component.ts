@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { Project } from '../../models/project'; //Importo el modelo
-import { ProjectService } from '../../services/project.service'; //Importo el servicio que tiene las funciones de crear
-import { Global } from '../../services/global'; // Para usar la conexion url de la api en este componente directamente
-import { Router, ActivatedRoute, Params } from '@angular/router';
+import { Project } from '../../models/project';
+import { ProjectService } from '../../services/project.service';
+import { User } from '../../models/user';
 import { UserService } from '../../services/user.service';
+import { Global } from '../../services/global';
+import { Router, ActivatedRoute, Params } from '@angular/router';
 
 @Component({
   selector: 'app-projects',
@@ -13,6 +14,7 @@ import { UserService } from '../../services/user.service';
 })
 export class ProjectsComponent implements OnInit {
 	public projects: any;
+	public user: any;
 	public url:string;
 	public total:number=0;
 	public userID:string;
@@ -22,6 +24,8 @@ export class ProjectsComponent implements OnInit {
 		private _projectService: ProjectService,
 		private _userService: UserService,
 		private _route: ActivatedRoute,
+    	private _router: Router,
+
 
 	)
 	{
@@ -40,6 +44,10 @@ export class ProjectsComponent implements OnInit {
 		(
 			response =>
 			{
+				this.user = response.user;
+				if(this.user.tipo=="member")
+      				this._router.navigate(['proyectos/user/'+this.userID]);
+					
 			},
 			error =>
 			{
